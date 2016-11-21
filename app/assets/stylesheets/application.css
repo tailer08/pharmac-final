@@ -13,7 +13,6 @@
  *= require_tree .
  *= require_self
  */
- 
  body{
      background-color: #3fbcf0;
      color: white;
@@ -21,17 +20,3 @@
      text-align: center;
  }
  
- .signup,.panel{    
-     color: #3fbcf0;
-     font-weight: 200;
-     line-height: 1.1;
- }
- 
- .signup .panel-footer{
-     color: gray;
- }
- 
- .signup .panel-footer a{
-     color: #3fbcf0;
-     text-decoration: underline;
- }

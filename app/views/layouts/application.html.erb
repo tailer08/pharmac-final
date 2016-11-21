@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="login.css">
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -14,28 +15,10 @@
 
   <body>
     <div class="container">
-      <div> Logo </div>
-      
-      <div class="panel panel-default signup">
-        <div class="panel-body">
-          <h3> Login using your account! </h3>
-        </div>
-        <div class="panel-footer">
-          <h4>
-            Create new account! 
-            <%= link_to "Sign Up",  signup_path %>
-          </h4>
-        </div>
-      </div>
-        <ul class="nav navbar-nav navbar-right">
-          <li><%= link_to "Home",   home_path %></li>
-          <li><%= link_to "Help",   help_path %></li>
-          <li><%= link_to "About",  about_path %></li>
-        </ul>  
-      </div>
-    </div>
-    <div class="container">
       <%= yield %>
     </div>
+    <!--<div>-->
+    <!--  <%= debug(params) if Rails.env.development? %>-->
+    <!--</div>-->
   </body>
 </html>

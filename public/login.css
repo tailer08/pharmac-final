@@ -1,0 +1,57 @@
+
+ #logo{
+    margin-top: 100px;
+    margin-bottom: 50px;  
+ }
+ 
+ .login-panel,.panel{    
+     color: #3fbcf0;
+     font-weight: 200;
+     line-height: 1.1;
+     max-width: 430px;
+     margin: 0 auto 20px;
+     border-radius: 8px;
+     margin-bottom: 10px;
+ }
+ 
+ .login-panel .panel-footer{
+     color: gray;
+ }
+ 
+ .login-panel .panel-footer a{
+     color: #3fbcf0;
+     text-decoration: underline;
+ }
+ 
+ #login-footer>a{
+     font-weight: 200;
+     line-height: 1.1;
+     color:white;
+     text-decoration: underline;
+     font-size: 16px;
+     margin: 10px;
+ }
+ 
+ .form-control, .login-form{
+     color: black;
+     margin-top: 15px;
+ }
+ 
+ .login-button{
+     margin-top: 15px;
+     width: 100%;
+ }
+ 
+ #login-logo > img{
+    height: 190px;
+    margin-bottom: 20px;
+ }
+ 
+ #login-footer > a:hover{
+     color: Blue;
+     background-color: transparent;
+ }
+ 
+ .login-panel > .panel-body > h3{
+     margin-bottom: 5px;
+ }
