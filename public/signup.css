@@ -1,0 +1,52 @@
+.signup-nav>nav{
+    background-color: transparent;
+    color: white;
+    font-weight: 200;
+    line-height: 1.1;
+}
+
+.signup-nav img{
+    height: 90px;
+    position: relative;
+    top: -14px;
+}
+
+.signup-nav .navbar-brand{
+    float: none;
+    color: white;
+    font-size: 45px;
+    font-family: fantasy;
+    margin-left: 0px;
+    padding-left: 0px;
+}
+
+.signup .navbar-brand:hover{
+    background-color: transparent;
+}
+
+.signup-nav .nav>li>a{
+    color: white;
+    background-color: transparent;
+    border: white 2px solid;
+    border-radius: 26px;
+    width: 78px;
+    font-size: 15px;
+}
+
+.signup-panel{
+    background-color: #f9f9f9;
+    color: black;
+    float: left;
+    margin-left: -241px;
+    margin-top: 40px;
+    height: 450px;
+    border-radius: 20px;
+}
+
+.signup-center{
+    height: 530px;
+    width: 1216px;
+    background-color: white;
+    margin-left: -30px;
+    margin-top: -22px;
+}

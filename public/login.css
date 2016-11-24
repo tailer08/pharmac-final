@@ -32,19 +32,22 @@
      margin: 10px;
  }
  
- .form-control, .login-form{
+ .login-form{
      color: black;
      margin-top: 20px;
+     height: 44px;
  }
  
  .login-button{
-     margin-top: 15px;
+     margin-top: 20px;
      width: 100%;
+     margin-bottom: 20px;
+     height: 44px;
  }
  
  #login-logo > img{
-    height: 190px;
-    margin-bottom: 20px;
+    height: 140px;
+    margin-bottom: 33px;
  }
  
  #login-footer > a:hover{
@@ -53,5 +56,10 @@
  }
  
  .login-panel > .panel-body > h3{
-     margin-bottom: 5px;
+     margin: 30px;
+ }
+ 
+ #login-signup>a:hover{
+     color: Blue;
+     background-color: transparent;
  }

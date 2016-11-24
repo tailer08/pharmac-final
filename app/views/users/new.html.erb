@@ -1,22 +1,40 @@
 <% provide(:title, 'Sign up') %>
-<h1>Sign up</h1>
-
-<div class="row">
-  <div class="col-md-6 col-md-offset-3">
-    <%= form_for(@user) do |f| %>
-      <%= f.label :name %>
-      <%= f.text_field :name %>
-
-      <%= f.label :email %>
-      <%= f.email_field :email %>
-
-      <%= f.label :password %>
-      <%= f.password_field :password %>
-
-      <%= f.label :password_confirmation, "Confirmation" %>
-      <%= f.password_field :password_confirmation %>
-
-      <%= f.submit "Create my account", class: "btn btn-primary" %>
-    <% end %>
-  </div>
+<div class="signup-nav">
+  <nav class="navbar">
+    <div class="navbar-header">
+      <img src="PC.png" />
+      <a class="navbar-brand" href="#">PharmaC</a>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a href="/" class="btn btn-default" role="button">Login</a></li>
+    </ul>
+  </nav>
 </div>
+
+<div class="signup-center">
+  <div class="panel panel-default signup-panel">
+    <div class="panel-body">A Basic Panel
+      <h1>Sign up</h1>  
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <%= form_for(@user) do |f| %>
+            <%= f.label :name %>
+            <%= f.text_field :name %>
+  
+            <%= f.label :email %>
+            <%= f.email_field :email %>
+  
+            <%= f.label :password %>
+            <%= f.password_field :password %>
+  
+            <%= f.label :password_confirmation, "Confirmation" %>
+            <%= f.password_field :password_confirmation %>
+  
+            <%= f.submit "Create my account", class: "btn btn-primary" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>  
+</div>
+  
