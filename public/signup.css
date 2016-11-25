@@ -49,4 +49,12 @@
     background-color: white;
     margin-left: -30px;
     margin-top: -22px;
+    text-align: left;
+}
+
+.signup-center label{
+    color: black;
+    font-weight: lighter;
+    margin-left: 13px;
+    margin-top: 19px;
 }
