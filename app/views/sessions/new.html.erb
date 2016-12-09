@@ -1,0 +1,34 @@
+
+  <div id="login-logo"> 
+      <img src="PC.png" />
+  </div>
+  
+  <div class="panel panel-default login-panel">
+    
+    <div class="panel-body">
+      <h3> Login to PharmaC! </h3>
+      <div id="login-form">
+        <%= form_for(:session, url: login_path) do |f| %>
+          <%= f.email_field :email, class: 'form-control login-form', placeholder: 'Email Address'%>
+          <%= f.password_field :password, class: 'form-control login-form', placeholder: 'Password' %>
+          <%= f.submit "Log in", class: "btn btn-primary login-button" %>
+        <% end %>
+      </div>
+        
+    </div>
+    
+    <div class="panel-footer">
+      <h4 id="login-signup">
+        Create new account! 
+        <%= link_to "Sign Up",  '/signup' %>
+      </h4>
+    </div>
+    
+  </div>
+  
+  <div id="login-footer">
+      <%= link_to "Home",   home_path %> 
+      <%= link_to "Help",   help_path %> 
+      <%= link_to "About",  about_path %>
+  </div>
+  

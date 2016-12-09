@@ -14,24 +14,28 @@
 <div class="signup-center">
   <div class="panel panel-default signup-panel">
     <div class="panel-body">
-      <div class="row">
-        <div class="">
-          <%= form_for(@user) do |f| %>
-            <%= f.label :name %>
-            <%= f.text_field :name %>
-  
-            <%= f.label :email %>
-            <%= f.email_field :email %>
-  
-            <%= f.label :password %>
-            <%= f.password_field :password %>
-  
-            <%= f.label :password_confirmation, "Confirmation" %>
-            <%= f.password_field :password_confirmation %>
-  
-            <%= f.submit "Create my account", class: "btn btn-primary" %>
-          <% end %>
-        </div>
+      <div class="row signup-input">
+        <%= form_for(@user) do |f| %>
+          <%= render 'shared/error_messages' %>
+          
+          <%= f.label :first_name %>
+          <%= f.text_field :first_name, class: 'form-control' %>
+          
+          <%= f.label :last_name %>
+          <%= f.text_field :last_name, class: 'form-control' %>
+
+          <%= f.label :email %>
+          <%= f.email_field :email, class: 'form-control' %>
+
+          <%= f.label :password %>
+          <%= f.password_field :password, class: 'form-control' %>
+
+          <%= f.label :password_confirmation, "Confirm Password" %>
+          <%= f.password_field :password_confirmation, class: 'form-control' %>
+
+          <%= f.submit "CREATE MY ACCOUNT", class: "btn btn-primary signup-button" %>
+        <% end %>
+        <p>Signing up signifies that you have read and agree to the <em>Terms of Service</em> and our <em>Privacy Policy</em>.</p>
       </div>
     </div>
   </div>  

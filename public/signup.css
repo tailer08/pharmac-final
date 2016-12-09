@@ -34,17 +34,17 @@
 }
 
 .signup-panel{
-    background-color: #f9f9f9;
+    background-color: #f3f3f3;
     color: black;
     float: left;
     margin-left: -241px;
     margin-top: 40px;
-    height: 450px;
+    /*height: 450px;*/
     border-radius: 20px;
 }
 
 .signup-center{
-    height: 530px;
+    /*height: 530px;*/
     width: 1216px;
     background-color: white;
     margin-left: -30px;
@@ -56,5 +56,30 @@
     color: black;
     font-weight: lighter;
     margin-left: 13px;
-    margin-top: 19px;
 }
+
+.signup-center input{
+    color:red;   
+}
+
+.signup-input input{
+    color: black;
+    width: 91%;
+    height: 40px;
+    margin-left: 15px;
+    padding-left: 10px;
+    border: 1px #dddbdb solid;
+    margin-bottom: 20px;
+    border-radius: 10px;
+}
+
+.signup-input .btn{
+    color:white;
+    margin-top: 8px;
+    background-color:#ff4800;
+}
+
+.signup-input p{
+    margin-top: -8px;
+}
+
