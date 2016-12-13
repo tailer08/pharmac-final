@@ -135,24 +135,38 @@
     </div>
     
     <!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Modal Header</h4>
-      </div>
-      <div class="modal-body">
-        <p>Some text in the modal.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    <div id="myModal" class="modal fade" role="dialog" >
+      <div class="modal-dialog">
+    
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header" style="background-color:#3fbcf0;">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title" style="color:white;">Product Information</h4>
+          </div>
+          <div class="modal-body" style="color:white">
+            <div id="modal-form">
+              <%= form_tag("/medicine", method: "post") do %>
+                <%= label_tag(:generic_name, "Generic Name:") %>
+                <%= text_field_tag(:generic_name) %>
+                <%= label_tag(:brand_name, "Brand Name:") %>
+                <%= text_field_tag(:brand_name) %>
+                <%= label_tag(:price, "Price:") %>
+                <%= text_field_tag(:price) %>
+                <%= label_tag(:quantity, "Quantity:") %>
+                <%= text_field_tag(:quantity) %>
+                <%= label_tag(:mg, "Milligrams:") %>
+                <%= text_field_tag(:mg) %>
+            </div>
+              <button type="submit" class="btn" id="modal-form-submit">Add To Inventory</button>
+            <% end %>  
+          </div>
+          <div class="modal-footer" style="background-color:#3fbcf0;">
+            <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+          </div>
+        </div>
+    
       </div>
     </div>
-
-  </div>
-</div>
   </body>
 </html>

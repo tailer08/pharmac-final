@@ -108,6 +108,10 @@ form,#dashboard-search-bar{
     margin-bottom: 15px;
 }
 
+#user-data:hover{
+    background-color: transparent;
+}
+
 .btn{
     width: 240px;
 }
@@ -127,4 +131,57 @@ form,#dashboard-search-bar{
 thead{
     color: #585959;
     font-weight: bold;
+}
+
+#modal-form{
+    background-color: #389bd3;
+    margin: 6px 30px;
+    border-radius: 15px;
+    padding: 18px 7px;
+}
+
+#modal-form>form{
+    padding:0px;
+}
+
+#modal-form>form>input {
+    font-family: inherit;
+    font-size: 20px;
+    line-height: 30px;
+    display: block;
+    width: 100%;
+    margin: 5px 0px;
+    color: #08668d;
+    margin-left: 0px;
+    padding: 3px 10px;
+    text-align: left;
+}
+
+#modal-form>form>label {
+    display: block;
+    max-width: 100%;
+    margin-bottom: 5px;
+    font-weight: 700;
+    text-align: left;
+    font-size: 16px;
+}
+
+#modal-form>form>button {
+    background-color: green;
+}
+
+#modal-form-submit {
+    background-color: #4CAF50;
+    width: 90%;
+    border-radius: 7px;
+    line-height: 28px;
+    margin-top: 9px;
+    font-size: 17px;
+    font-weight: 700;
+    margin: 6px 30px;
+}
+
+#modal-form-submit:hover{
+    background-color: #27ae60;
+    color:white;
 }
