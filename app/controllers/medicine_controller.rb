@@ -10,6 +10,7 @@ class MedicineController < ApplicationController
                                  :Quantity => params[:quantity],
                                  :mg => params[:mg])
         @medicine.save
+        redirect_to dashboard_url(email: params[:email])
     end
     
     def create
