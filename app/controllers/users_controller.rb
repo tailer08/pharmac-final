@@ -28,9 +28,8 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     # @user = User.new(params[:user])    # Not the final implementation!
     if @user.save
-      log_in @user
-      flash[:success] = "Welcome to the Sample App!"
-      redirect_to @user
+      # log_in @user
+      redirect_to dashboard_url(email: @user.email)
     else
       render 'new'
     end
