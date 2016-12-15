@@ -41,7 +41,7 @@
         <a href="/sortBrand" type="button" class="btn btn-primary">Sort By Brand</a>
         <a href="/sortStock" type="button" class="btn btn-success">Sort By Stocks</a>
         <a href="sortPrice" type="button" class="btn btn-warning">Sort By Price</a>
-        <!--<a href="#" role="button" class="btn btn-info add" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus"></span>Add</a>-->
+        <a href="#" role="button" class="btn btn-info add" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus"></span>Add</a>
       </div>
       <table class="table table-striped" style="text-align: left;">
         <thead>
@@ -52,24 +52,18 @@
             <td>Dosage(mg/ml)</td>
             <td>Price</td>
             <td>Last Updated</td>
-            <td>Add Stock</td>
-            <td>Decrease Stock</td>
           </tr>
         </thead>
         <tbody>
           <% @medicine.each do |p| %>
           
             <tr>
-            <a href="/sortBrand">
               <td><%= p.generic %></td>
               <td><%= p.brand %></td>
               <td><%= p.quantity %></td>
               <td><%= p.mg %></td>
               <td>₱<%= p.price %></td>
               <td><%= p.updated_at.strftime("%B %d,%Y") %></td>
-            </a>
-              <td><a href="/sortBrand" type="button" class="btn-sm btn-success">+</a></td>
-              <td><a href="/sortBrand" type="button" class="btn-sm btn-danger">-</a></td>
             </tr>
           <% end %>
         </tbody>
@@ -81,7 +75,7 @@
       <div class="modal-dialog">
     
         <!-- Modal content-->
-        <!--<div class="modal-content">
+        <div class="modal-content">
           <div class="modal-header" style="background-color:#3fbcf0;">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             <h4 class="modal-title" style="color:white;">Product Information</h4>
@@ -104,9 +98,9 @@
             <% end %>  
           </div>
           <div class="modal-footer" style="background-color:#3fbcf0;">
-            <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           </div>
-        </div>-->
+        </div>
     
       </div>
     </div>
