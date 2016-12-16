@@ -3,7 +3,6 @@ class DashboardController < ApplicationController
     def index
         @user = User.find_by_email(params[:email].to_s.downcase)
         @medicine = Medicine.all.order(updated_at: :asc)
-        render 'create'
     end
     def brandSort
          @user = User.find_by_email(params[:email].to_s.downcase)
