@@ -10,4 +10,17 @@ class StaticPagesController < ApplicationController
   
   def login
   end
+  
+  def howto_add
+  end
+  
+  def howto_search
+  end
+  
+  def howto_signup
+  end
+
+  def whatfor
+  end
+
 end
