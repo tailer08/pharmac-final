@@ -4,7 +4,7 @@ class CreateMedicines < ActiveRecord::Migration[5.0]
       t.string :generic
       t.string :brand
       t.integer :price
-      t.integer :Quantity
+      t.integer :quantity
       t.integer :mg
       t.timestamps
     end
