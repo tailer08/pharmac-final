@@ -4,16 +4,23 @@ class MedicineController < ApplicationController
     end
     
     def new
-        @medicine = Medicine.new(    :generic        => params[:generic], 
-                                     :brand          => params[:brand],
-                                     :price          => 0,
-                                     :quantity       => 0,
-                                     :mg             => params[:mg],
-                                    :medType        => params[:medType],
-                                     :classifcation => params[:classification]
-                                  )
+        #@medicine = Medicine.new(    :generic        => params[:generic], 
+        #                             :brand          => params[:brand],
+        #                             :price          => 0,
+        #                             :quantity       => 0,
+        #                             :mg             => params[:mg],
+        #                             :medType        => params[:medType],
+        #                            :classifcation => params[:classification]
+        #
+        @medicine = Medicine.new(   :generic => params[:generic_name],
+                                    :brand => params[:brand_name],
+                                    :price => params[:price],
+                                    :quantity => params[:quantity],
+                                    :mg => params[:mg],
+                                    :medType => "",
+                                    :classifcation => "")
         @medicine.save
-        redirect_to create_med_url(email: params[:email])
+        redirect_to dashboard_url(email: params[:email])
     end
     
     def create
