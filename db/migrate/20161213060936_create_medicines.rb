@@ -3,8 +3,9 @@ class CreateMedicines < ActiveRecord::Migration[5.0]
     create_table :medicines do |t|
       t.string :generic
       t.string :brand
-      t.integer :price
+      t.float :price
       t.integer :quantity
+      t.integer :usableQuantity, :default => 0
       t.integer :mg
       t.timestamps
     end

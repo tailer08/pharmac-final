@@ -13,13 +13,16 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
-  <body>
+  
+  <body><!--
+    <p id="error"><%= flash[:error] %></p>
+    <p id="notice"><%= flash[:notice] %></p>
+    <p id="warning"><%= flash[:warning] %></p>-->
     <div class="container">
       <%= yield %>
     </div>
-    <!--<div>-->
-    <!--  <%= debug(params) if Rails.env.development? %>-->
-    <!--</div>-->
+    <div>
+    <!-- <%= debug(params) if Rails.env.development? %>-->
+    </div>
   </body>
 </html>

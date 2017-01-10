@@ -17,20 +17,52 @@ class StocksController < ApplicationController
 
   # GET /stocks/new
   def addNew
-    @medicine = params[:medicine]
-    @stock = Stock.new( :quantity => params[:medicine],
-                        :price    => params[:price],
-                        :expiration_date => params[:expiration_date])
-    @medicine.quantity = (@medicine.quantity.to_i + @stock.quantity.to_i).to_s[change this later]
+    @medicine = Medicine.find(params[:medicine])
+    @stock = @medicine.stocks.create(
+                         # params.require(:stock).permit(:quantity, :price, :expiration_date)
+                          :medicine_id => params[:medicine_id],
+                          :quantity => params[:quantity],
+                          :price    => params[:price]
+           #               :expiration_date => params[:expiration_date]
+                      )
+    if @medicine.quantity == 0
+       @medicine.price = params[:price]
+    end
+    @medicine.quantity = @medicine.quantity.to_i + @stock.quantity.to_i
     @medicine.save
     @stock.save
-    redirect_to dashboard_url
+    redirect_to medicine_url
   end
   def subNew
-    @medicine = params[:medicine]
-    @medicine = @medicine.quantity - params[:quantity]
-    @medicine.save
-    render 'create'
+    @medicine = Medicine.find(params[:medicine])
+    @stock = @medicine.stocks
+    if @medicine.quantity.to_i < params[:quantity].to_i
+       flash.now[:danger] = 'Invalid amount'
+      render 'create'
+    end
+    @var = params[:quantity]
+    @stock.each do |item|
+      if item.quantity.to_i <= @var.to_i 
+        @medicine.quantity = @medicine.quantity.to_i - item.quantity.to_i
+        @var = @var.to_i - item.quantity.to_i
+        if(@stock[i+1].nil?) then
+          @medicine.price = @medicine.price
+        else 
+          @medicine.price = @stock[i+1].price
+        end
+        item.destroy
+        @medicine.save
+      elsif @var.to_i < item.quantity.to_i 
+        @medicine.quantity = @medicine.quantity.to_i - @var.to_i
+        item.quantity =  item.quantity.to_i - @var.to_i
+        @var =0
+        item.save
+        @medicine.save
+        break
+      end
+    end
+    @medicine = Medicine.all.order(updated_at: :asc)
+    redirect_to medicine_url
   end
 
   # GET /stocks/1/edit

@@ -9,7 +9,11 @@ Rails.application.routes.draw do
   get  '/dashboard', to: 'dashboard#index'
   get  '/login',     to: 'sessions#new'
   post '/login',     to: 'sessions#create'
-  post '/medicine',  to: 'medicine#new'
+  
+  #medicine routes
+  get '/medicine', to: 'medicine#index'
+  post '/medicine',  to: 'medicine#index'
+  post '/medicine_new', to: 'medicine#new'
   delete '/logout',  to: 'sessions#destroy'
   
   get '/sortStock', to: 'dashboard#stockSort'
@@ -17,13 +21,15 @@ Rails.application.routes.draw do
   get '/sortPrice',  to: 'dashboard#priceSort'
   get '/medicine_show', to: 'medicine#show'
   
-  get '/create_med', to: 'dashboard#createMedicine'
+  get '/create_med', to: 'medicine#index'
   post '/addStock' , to: 'stocks#addNew'
   post '/subStock' , to: 'stocks#subNew'
+  post '/createMed', to: 'medicine#createMed'
   
   resources :users
   resources :stocks
   resources :stock
+  resources :medicine
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   
 end

@@ -19,9 +19,10 @@
           <li><a href="#">PharmaC</a></li>
         </ul>
         
-        <form class="navbar-form navbar-left" id="dashboard-search-bar">
+        <form class="navbar-form navbar-left" id="dashboard-search-bar" method="get">
+          <input type="hidden" name="sort" value=<%= params[:sort]%>>
           <div class="input-group">
-            <input type="text" class="form-control" placeholder="Search for Generic">
+            <input type="text" name="search" class="form-control" placeholder=<%= params[:search]%>>
             <div class="input-group-btn">
               <button class="btn btn-default" type="submit">
                 <i class="glyphicon glyphicon-search"></i>
@@ -37,23 +38,24 @@
       </div>
     </nav>
     <div class="container body">
-      <div class="function-buttons"><!--
-        <a href="/sortBrand" type="button" class="btn btn-primary">Sort By Brand</a>
-        <a href="/sortStock" type="button" class="btn btn-success">Sort By Stocks</a>
-        <a href="sortPrice" type="button" class="btn btn-warning">Sort By Price</a>-->
+      <div class="function-buttons">
         <a href="#" role="button" class="btn btn-info add" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus"></span>Add</a>
       </div>
       <table class="table table-striped" style="text-align: left;">
         <thead>
           <tr>
-            <td>Generic Name</td>
-            <td>Brand Name</td>
-            <td>Classification</td>
-            <td>Dosage(mg/ml)</td>
-            <td>Medicine Type</td>
-            <td>Last Updated</td>
+            <form method="get">
+            <input type="hidden" name="search" value=<%= params[:search]%>>
+            <td><button name="sort" value="generic" class="btn-sm btn btn-info" type="submit" style="width:100%;">Generic Name</button></td>
+            <td><button name="sort" value="brand" class="btn-sm btn btn-info" type="submit" style="width:100%;">Brand Name</button></td>
+            <td><button name="sort" value="classification" class="btn btn-info btn-sm" type="submit" style="width:100%;">Classification</button></td>
+            <td><button name="sort" value="mg" class="btn btn-info btn-sm" type="submit" style="width:100%;">Dosage(mg/ml)</button></td>
+            <td><button name="sort" value="medType" class="btn btn-info btn-sm" type="submit" style="width:100%;">Medicine Type</button></td>
+            <td><button name="sort" value="updated_at" class="btn btn-info btn-sm" type="submit" style="width:100%;">Last Updated</button></td>
+            </form>
             <td>Add Stock</td>
             <td>Decrease Stock</td>
+            <td>Edit Stock</td>
           </tr>
         </thead>
         <tbody>
@@ -62,12 +64,13 @@
             <tr>
               <td><%= p.generic %></td>
               <td><%= p.brand %></td>
-              <td><%= p.classifcation %></td>
+              <td><%= p.classification %></td>
               <td><%= p.mg %></td>
               <td><%= p.medType %></td>
               <td><%= p.updated_at.strftime("%B %d,%Y") %></td>
-              <td><input type="hidden" value="<%= p.id %>" id="hadstock"/><a href="#" role="button" class="btn-sm btn-success" class="appendMed" data-toggle="modal" data-target="#addModal"><span class="glyphicon glyphicon-plus"></span></a></td>
-              <td><a href="#" role="button" class="btn-sm btn-danger" data-toggle="modal" data-target="#subModal"><span class="glyphicon glyphicon-minus"></span></a></td>
+              <td><input type="hidden" value="<%= p.id %>" /><a href="#" role="button" class="btn-sm btn-success appendMed" data-toggle="modal" data-target="#addModal"><span class="glyphicon glyphicon-plus"></span></a></td>
+              <td><input type="hidden" value="<%= p.id %>" /><a href="#" role="button" class="btn-sm btn-danger minusMed" data-toggle="modal" data-target="#subModal"><span class="glyphicon glyphicon-minus"></span></a></td>
+              <td><input type="hidden" value="<%= p.id %>" /><%= link_to "Edit", edit_medicine_path(p.id), :class => "btn-sm btn-warning" %></td>
             </tr>
           <% end %>
         </tbody>
@@ -86,15 +89,15 @@
           </div>
           <div class="modal-body" style="color:white">
             <div id="modal-form">
-              <%= form_tag("/medicine", method: "post") do %>
+              <%= form_tag("/createMed", method: "post") do %>
                 <%= label_tag(:generic, "Generic Name:") %>
                 <%= text_field_tag(:generic) %>
                 <%= label_tag(:brand, "Brand Name:") %>
                 <%= text_field_tag(:brand) %>
                 <%= label_tag(:medType, "Medicine Type:") %>
-                <%= select_tag :medType,options_for_select([["Syrup", "Syrup"], ["Suspension", "Suspension"],["Tablet", "Tablet"],["Capsule", "Capsule"]]) %>
+                <%= select_tag :medType,options_for_select([["Syrup", "Syrup"], ["Suspension", "Suspension"],["Tablet", "Tablet"],["Capsule", "Capsule"]]),:style=>'color:#000000;' %>
                 <%= label_tag(:quantity, "Classification:") %>
-                <%= select_tag :classification,options_for_select([["Antihistamine", "Antihistamine"], ["Antibiotic", "Antibiotic"]]) %>
+                <%= select_tag :classification,options_for_select([["Antihistamine", "Antihistamine"], ["Antibiotic", "Antibiotic"]]),:style=>'color:#000000;' %>
                 <%= label_tag(:mg, "Milligrams/MilliLiters:") %>
                 <%= text_field_tag(:mg) %>
             </div>
@@ -127,7 +130,7 @@
                 <%= label_tag(:price, "Price:") %>
                 <%= text_field_tag(:price) %>
                 <%= label_tag(:expiration_date, "Expiration date:") %>
-                <%= date_select :expiration_date,{order: [:month, :day, :year], prompt: { day: 'Select day', month: 'Select month', year: 'Select year' }, start_year: Date.today.year - 18, end_year: Date.today.year - 100}, {required: true} %>
+                <%= date_select :expiration_date,{order: [:month, :day, :year], prompt: { day: 'Select day', month: 'Select month', year: 'Select year' }, start_year: Time.now.year , end_year: Date.today.year }, {required: true},:style=>'color:#000000;' %>
             </div>
               <button type="submit" class="btn" id="modal-form-submit">Add To Inventory</button>
             <% end %>  
@@ -152,6 +155,7 @@
           <div class="modal-body" style="color:white">
             <div id="modal-form">
              <%= form_tag("/subStock", method: "post") do %>
+               <%= hidden_field_tag(:medicine, 0, {:id => "minuStock"})%>
                 <%= label_tag(:quantity, "Quantity:") %>
                 <%= text_field_tag(:quantity) %>
             </div>
@@ -168,14 +172,13 @@
     </div>
   </body>
   <script>
-  $(".appendMed").click(function (event){
-      alert("works");
-     var myBookId = $(this).closest.('input').data('hadstock');
-     alert(myBookId);
+  $(".appendMed").click(function(event){
+     var myBookId = $(this).prev('input').val();
      $("#adstock").val( myBookId );
-     // As pointed out in comments, 
-     // it is superfluous to have to manually call the modal.
-     // $('#addBookDialog').modal('show');
+  });
+  $(".minusMed").click(function(event){
+     var medicineId = $(this).prev('input').val();
+     $("#minuStock").val( medicineId );
   });
   </script>
 </html>

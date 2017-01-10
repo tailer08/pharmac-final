@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="dashboard.css">
+    
+  </head>
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top " id="dashboard-nav">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <img src="PC.png" class="navbar-brand"/> 
+        </div>
+        <ul class="nav navbar-nav">
+          <li><a href="#">PharmaC</a></li>
+        </ul>
+        
+        <form class="navbar-form navbar-left" id="dashboard-search-bar">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Search for Generic">
+            <div class="input-group-btn">
+              <button class="btn btn-default" type="submit">
+                <i class="glyphicon glyphicon-search"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+        <a href="/dashboard">View medicines</a>
+        <ul class="nav navbar-nav navbar-right" id="dashboard-user">
+          <li><a href="#" id="user-data">
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div class="container body">
+      <div class="function-buttons"><!--
+        <a href="/sortBrand" type="button" class="btn btn-primary">Sort By Brand</a>
+        <a href="/sortStock" type="button" class="btn btn-success">Sort By Stocks</a>
+        <a href="sortPrice" type="button" class="btn btn-warning">Sort By Price</a>-->
+        <a href="#" role="button" class="btn btn-info add" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-plus"></span>Add</a>
+      </div>
+      <table class="table table-striped" style="text-align: left;">
+        <thead>
+          <tr>
+            <td>Generic Name</td>
+            <td>Brand Name</td>
+            <td>Classification</td>
+            <td>Dosage(mg/ml)</td>
+            <td>Medicine Type</td>
+            <td>Last Updated</td>
+            <td>Add Stock</td>
+            <td>Decrease Stock</td>
+          </tr>
+        </thead>
+        <tbody>
+          <% @medicine.each do |p| %>
+          
+            <tr>
+              <td><%= p.generic %></td>
+              <td><%= p.brand %></td>
+              <td><%= p.classifcation %></td>
+              <td><%= p.mg %></td>
+              <td><%= p.medType %></td>
+              <td><%= p.updated_at.strftime("%B %d,%Y") %></td>
+              <td><input type="hidden" value="<%= p.id %>" id="hadstock"/><a href="#" role="button" class="btn-sm btn-success appendMed" data-toggle="modal" data-target="#addModal"><span class="glyphicon glyphicon-plus"></span></a></td>
+              <td><a href="#" role="button" class="btn-sm btn-danger" data-toggle="modal" data-target="#subModal"><span class="glyphicon glyphicon-minus"></span></a></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog" >
+      <div class="modal-dialog">
+    
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header" style="background-color:#3fbcf0;">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title" style="color:white;">Product Information</h4>
+          </div>
+          <div class="modal-body" style="color:white">
+            <div id="modal-form">
+              <%= form_tag("/createMed", method: "post") do %>
+                <%= label_tag(:generic, "Generic Name:") %>
+                <%= text_field_tag(:generic) %>
+                <%= label_tag(:brand, "Brand Name:") %>
+                <%= text_field_tag(:brand) %>
+                <%= label_tag(:medType, "Medicine Type:") %>
+                <%= select_tag :medType,options_for_select([["Syrup", "Syrup"], ["Suspension", "Suspension"],["Tablet", "Tablet"],["Capsule", "Capsule"]]) %>
+                <%= label_tag(:quantity, "Classification:") %>
+                <%= select_tag :classification,options_for_select([["Antihistamine", "Antihistamine"], ["Antibiotic", "Antibiotic"]]) %>
+                <%= label_tag(:mg, "Milligrams/MilliLiters:") %>
+                <%= text_field_tag(:mg) %>
+            </div>
+              <button type="submit" class="btn" id="modal-form-submit">Add To Inventory</button>
+            <% end %>  
+          </div>
+          <div class="modal-footer" style="background-color:#3fbcf0;">
+            <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+          </div>
+        </div>
+
+    
+      </div>
+    </div>
+    <div id="addModal" class="modal fade" role="dialog" >
+      <div class="modal-dialog">
+    
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header" style="background-color:#3fbcf0;">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title" style="color:white;">Add Stock</h4>
+          </div>
+          <div class="modal-body" style="color:white">
+            <div id="modal-form">
+              <%= form_tag("/addStock", method: "post") do %>
+                <%= hidden_field_tag(:medicine, 0, {:id => "adstock"})%>
+                <%= label_tag(:quantity, "Quantity:") %>
+                <%= text_field_tag(:quantity) %>
+                <%= label_tag(:price, "Price:") %>
+                <%= text_field_tag(:price) %>
+                <%= label_tag(:expiration_date, "Expiration date:") %>
+                <%= date_select :expiration_date,{order: [:month, :day, :year], prompt: { day: 'Select day', month: 'Select month', year: 'Select year' }, start_year: Date.today.year - 18, end_year: Date.today.year - 100}, {required: true} %>
+            </div>
+              <button type="submit" class="btn" id="modal-form-submit">Add To Inventory</button>
+            <% end %>  
+          </div>
+          <div class="modal-footer" style="background-color:#3fbcf0;">
+            <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+          </div>
+        </div>
+
+    
+      </div>
+    </div>
+    <div id="subModal" class="modal fade" role="dialog" >
+      <div class="modal-dialog">
+    
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header" style="background-color:#3fbcf0;">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title" style="color:white;">Reduce Stocks</h4>
+          </div>
+          <div class="modal-body" style="color:white">
+            <div id="modal-form">
+             <%= form_tag("/subStock", method: "post") do %>
+                <%= label_tag(:quantity, "Quantity:") %>
+                <%= text_field_tag(:quantity) %>
+            </div>
+              <button type="submit" class="btn" id="modal-form-submit">Reduce Stock</button>
+            <% end %>  
+          </div>
+          <div class="modal-footer" style="background-color:#3fbcf0;">
+            <!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+          </div>
+        </div>
+
+    
+      </div>
+    </div>
+  </body>
+  <script>
+  $(".appendMed").click(function(event){
+     var myBookId = $(this).prev('input').val();
+     alert(myBookId);
+     $("#adstock").val( myBookId );
+  });
+  </script>
+</html>

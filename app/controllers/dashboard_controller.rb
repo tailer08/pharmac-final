@@ -2,8 +2,9 @@ class DashboardController < ApplicationController
     
     def index
         @user = User.find_by_email(params[:email].to_s.downcase)
-        #@medicine = Medicine.where('quantity > 0')
-        @medicine = Medicine.all.order(updated_at: :asc)
+        @medicine = Medicine.where('quantity > 0').search(params[:search]).all.order(params[:sort])
+        #@medicine = Medicine.where('quantity > 0').order(updated_at: :asc)
+        #@medicine = Medicine.all.order(updated_at: :asc)
     end
     def brandSort
          @user = User.find_by_email(params[:email].to_s.downcase)

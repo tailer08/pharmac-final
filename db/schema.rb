@@ -12,55 +12,27 @@
 
 ActiveRecord::Schema.define(version: 20161214220315) do
 
-  create_table "brands", force: :cascade do |t|
-    t.string   "brandName"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "generics", force: :cascade do |t|
-    t.string   "genericName"
-    t.string   "desc"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
-  create_table "med_symptomps", force: :cascade do |t|
-    t.integer  "medicines_id"
-    t.integer  "symptomps_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.index ["medicines_id"], name: "index_med_symptomps_on_medicines_id"
-    t.index ["symptomps_id"], name: "index_med_symptomps_on_symptomps_id"
-  end
-
   create_table "medicines", force: :cascade do |t|
     t.string   "generic"
     t.string   "brand"
-    t.integer  "price"
+    t.float    "price"
     t.integer  "quantity"
     t.integer  "mg"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.string   "medType"
-    t.string   "classifcation"
+    t.string   "classification"
   end
 
   create_table "stocks", force: :cascade do |t|
-    t.integer  "medicines_id"
+    t.integer  "medicine_id"
     t.integer  "quantity"
-    t.integer  "price"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.float    "price"
+    t.boolean  "isActive",        default: true
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.date     "expiration_date"
-    t.index ["medicines_id"], name: "index_stocks_on_medicines_id"
-  end
-
-  create_table "symptomps", force: :cascade do |t|
-    t.string   "symptomps_name"
-    t.string   "desc"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.index ["medicine_id"], name: "index_stocks_on_medicine_id"
   end
 
   create_table "users", force: :cascade do |t|
