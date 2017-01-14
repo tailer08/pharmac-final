@@ -17,9 +17,11 @@ ActiveRecord::Schema.define(version: 20161214220315) do
     t.string   "brand"
     t.float    "price"
     t.integer  "quantity"
+    t.integer  "available",      default: 0
+    t.boolean  "isExpiring",     default: false
     t.integer  "mg"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.string   "medType"
     t.string   "classification"
   end

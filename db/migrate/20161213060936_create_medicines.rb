@@ -5,7 +5,8 @@ class CreateMedicines < ActiveRecord::Migration[5.0]
       t.string :brand
       t.float :price
       t.integer :quantity
-      t.integer :usableQuantity, :default => 0
+      t.integer :available, :default => 0
+      t.boolean :isExpiring, :default =>false
       t.integer :mg
       t.timestamps
     end

@@ -20,10 +20,12 @@ class MedicineController < ApplicationController
         @medicine.save
     respond_to do |format|
        if @medicine.save
-         format.html { redirect_to dashboard_url(email:@user.email), notice: 'Medicine was successfully created.' }
+         flash[:success] = "Save Successful"
+         format.html { redirect_to medicine_url(email:@user.email), notice: 'Medicine was successfully created.' }
          format.json { render :index, status: :created, location: @medicine }
        else
-         format.html { redirect_to dashboard_url(email:@user.email) }
+         flash[:error] = "Save Unsuccessful"
+         format.html { redirect_to medicine_url(email:@user.email) }
          format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
@@ -39,7 +41,7 @@ class MedicineController < ApplicationController
                                      :classification => params[:classification]
                                 )
         @medicine.save
-        redirect_to dashboard_url(email: params[:email])
+        redirect_to medicine_url(email: params[:email])
     end
     
     def create

@@ -40,32 +40,45 @@
       <div class="function-buttons">
         <form class="navbar-form navbar-left" method="get">
           <div class="input-group-btn">
+            <!---
             <button name="sort" value="brand" class="btn btn-primary" type="submit">Sort By Brand</button>
             <button name="sort" value="quantity" class="btn btn-success" type="submit">Sort By Stocks</button>
             <button name="sort" value="price" class="btn btn-warning" type="submit">Sort By Price</button>
+            -->
           </div>
         </form>
       </div>
       <table class="table table-striped" style="text-align: left;">
         <thead>
           <tr>
-            <td>Generic Name</td>
-            <td>Brand Name</td>
-            <td>Stocks</td>
-            <td>Dosage(mg/ml)</td>
-            <td>Price</td>
-            <td>Last Updated</td>
+            <form method="get">
+            <input type="hidden" name="search" value=<%= params[:search]%>>
+            
+            <td><button name="sort" value="generic" class="btn-sm btn btn-primary" type="submit" style="width:100%;">Generic Name</button></td>
+            <td><button name="sort" value="brand" class="btn-sm btn btn-primary" type="submit" style="width:100%;">Brand Name</button></td>
+            <td><button name="sort" value="quantity" class="btn-sm btn btn-primary" type="submit" style="width:100%;">Stocks</button></td>
+            <td><button name="sort" value="mg" class="btn btn-primary btn-sm" type="submit" style="width:100%;">Dosage(mg/ml)</button></td>
+            <td><button name="sort" value="price" class="btn btn-primary btn-sm" type="submit" style="width:100%;">Price</button></td>
+             <td><button name="sort" value="medType" class="btn btn-primary btn-sm" type="submit" style="width:100%;">Medicine Type</button></td>
+            <td><button name="sort" value="classification" class="btn btn-primary btn-sm" type="submit" style="width:100%;">Classification</button></td>
+            <td><button name="sort" value="updated_at" class="btn btn-primary btn-sm" type="submit" style="width:100%;">Last Updated</button></td>
+            </form>
           </tr>
         </thead>
         <tbody>
           <% @medicine.each do |p| %>
-          
+            <%if p.isExpiring%>
+            <tr style="background-color:red;">
+            <%else%>
             <tr>
+            <%end%>
               <td><%= p.generic %></td>
               <td><%= p.brand %></td>
-              <td><%= p.quantity %></td>
+              <td><%= p.quantity %>(<%=p.available%>)</td>
               <td><%= p.mg %></td>
               <td>₱<%= p.price %></td>
+              <td><%= p.medType %></td>
+              <td><%= p.classification %></td>
               <td><%= p.updated_at.strftime("%B %d,%Y") %></td>
             </tr>
           <% end %>

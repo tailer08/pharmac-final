@@ -70,7 +70,7 @@
               <td><%= p.updated_at.strftime("%B %d,%Y") %></td>
               <td><input type="hidden" value="<%= p.id %>" /><a href="#" role="button" class="btn-sm btn-success appendMed" data-toggle="modal" data-target="#addModal"><span class="glyphicon glyphicon-plus"></span></a></td>
               <td><input type="hidden" value="<%= p.id %>" /><a href="#" role="button" class="btn-sm btn-danger minusMed" data-toggle="modal" data-target="#subModal"><span class="glyphicon glyphicon-minus"></span></a></td>
-              <td><input type="hidden" value="<%= p.id %>" /><%= link_to "Edit", edit_medicine_path(p.id), :class => "btn-sm btn-warning" %></td>
+              <td><input type="hidden" value="<%= p.id %>" /><%= link_to "Change Price/Brand", edit_medicine_path(p.id), :class => "btn-sm btn-warning" %></td>
             </tr>
           <% end %>
         </tbody>

@@ -23,36 +23,51 @@ class StocksController < ApplicationController
                           :medicine_id => params[:medicine_id],
                           :quantity => params[:quantity],
                           :price    => params[:price]
-           #               :expiration_date => params[:expiration_date]
+                         # :expiration_date => params[:expiration_date]
                       )
-    if @medicine.quantity == 0
+    if @medicine.quantity == 0 
        @medicine.price = params[:price]
     end
+    if @medicine.available == 0
+      @medicine.available = @stock.quantity.to_i;
+    elsif @medicine.price == @stock.price
+      @medicine.available = @medicine.available + @stock.quantity.to_i
+    end
+      
     @medicine.quantity = @medicine.quantity.to_i + @stock.quantity.to_i
     @medicine.save
-    @stock.save
+    if @stock.save
+      flash[:success] = "Save Successful"
+      @stock.save
+    else
+      flash[:error] = "Missing parameters"
+    end
     redirect_to medicine_url
   end
   def subNew
     @medicine = Medicine.find(params[:medicine])
     @stock = @medicine.stocks
-    if @medicine.quantity.to_i < params[:quantity].to_i
-       flash.now[:danger] = 'Invalid amount'
+    if @medicine.available.to_i < params[:quantity].to_i
+       flash[:error] = 'Invalid amount the price of medicine would be different'
       render 'create'
     end
     @var = params[:quantity]
     @stock.each do |item|
-      if item.quantity.to_i <= @var.to_i 
-        @medicine.quantity = @medicine.quantity.to_i - item.quantity.to_i
+      if item.available.to_i <= @var.to_i && item.price == @medicine.price
+        @medicine.available = @medicine.available.to_i - item.quantity.to_i
+        @medicine.quantity = @medicine.quantity_to_i - item.quantity.to_i
         @var = @var.to_i - item.quantity.to_i
-        if(@stock[i+1].nil?) then
-          @medicine.price = @medicine.price
-        else 
-          @medicine.price = @stock[i+1].price
+        if(@medicine.available==0 && !@stock[i+1].nil?) then
+            @medicine.price = @stock[i+1].price
+        elsif @medicine.available==0 && @stock[i+1].nil?
+            @medicine.price = 0
+        else
+            @medicine.price = @medicine.price
         end
         item.destroy
         @medicine.save
-      elsif @var.to_i < item.quantity.to_i 
+      elsif @var.to_i < item.quantity.to_i  && item.price == @medicine.price
+        @medicine.available = @medicine.available.to_i - @var.to_i
         @medicine.quantity = @medicine.quantity.to_i - @var.to_i
         item.quantity =  item.quantity.to_i - @var.to_i
         @var =0

@@ -14,11 +14,19 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   
-  <body><!--
+  <body>
+    <!--
     <p id="error"><%= flash[:error] %></p>
     <p id="notice"><%= flash[:notice] %></p>
     <p id="warning"><%= flash[:warning] %></p>-->
     <div class="container">
+      <%if(!flash[:success].nil?)%>
+      <div class="alert alert-success"><%= flash[:success]%></div>
+      <%elsif(!flash[:notice].nil?)%>
+      <div class="alert alert-info"><%= flash[:notice]%></div>
+      <%elsif(!flash[:error].nil?)%>
+      <div class="alert alert-warning"><%= flash[:error]%></div>
+      <% end %>
       <%= yield %>
     </div>
     <div>
